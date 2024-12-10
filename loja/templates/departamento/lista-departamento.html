@@ -1,0 +1,33 @@
+{% extends '../base.html'%}
+{% block content %}
+    {% if departamentos|length != 0%}
+    <table>
+        <thead>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Funcionarios</th>
+        </thead>
+        <tbody>
+            {% for departamento in departamentos %}
+            <tr>
+                <td>{{departamento.nome}}</td>
+                <td>{{departamento.endereco}}</td>
+                <td>{% for funcionario in departamento.funcionarios.all%} {{funcionario.nome}} {% endfor %}</td>
+                {% if user.is_staff %}
+                <td><a href="{% url 'atualiza-departamento' departamento.id %}">Atualizar</a></td>
+                <td><a href="{% url 'remove-departamento' departamento.id %}">Remover</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+        <p>Não há nenhum departamento registrado!</p>
+    {% endif %}
+
+    {% if user.is_staff%}
+        <a href="{% url 'cria-departamento' %}">Registrar Novo Departamento</a>
+    {% endif %}
+
+{% endblock %}
