@@ -1,0 +1,31 @@
+{% extends '../base.html'%}
+{% block content %}
+    {% if categorias|length != 0%}
+    <table>
+        <thead>
+            <th>Nome</th>
+            <th>Descricao</th>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+            <tr>
+                <td>{{categoria.nome}}</td>
+                <td>{{categoria.descricao}}</td>
+                {% if user.is_staff %}
+                <td><a href="{% url 'atualiza-categoria' categoria.id %}">Atualizar</a></td>
+                <td><a href="{% url 'remove-categoria' categoria.id %}">Remover</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+        <p>Não há nenhuma categoria registrada!</p>
+    {% endif %}
+
+    {% if user.is_staff%}
+        <a href="{% url 'cria-categoria' %}">Registrar Nova Categoria</a>
+    {% endif %}
+
+{% endblock %}

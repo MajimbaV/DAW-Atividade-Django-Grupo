@@ -1,0 +1,21 @@
+{% extends '../base.html'%}
+{% block content %}
+    {% if categoria is not None %}
+        <h3>Atualizar Dados da Categoria: {{categoria.nome}}</h3>
+    {% else %}
+        <h3>Registrar Novo Categoria</h3>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="nome">
+            Nome:
+            <input type="text" name="nome" value="{{categoria.nome}}" required>
+        </label>
+        <label for="descricao">
+            Descrição
+            <input type="text" name="descricao" value="{{categoria.descricao}}" required>
+        </label>
+        <button type="submit">Enviar</button>
+    </form>
+{% endblock %}
