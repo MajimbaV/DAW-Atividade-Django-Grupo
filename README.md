@@ -1,4 +1,4 @@
-# Atividade Avaliativa Individual do 3º Bimestre
+# Atividade Avaliativa em Grupo do 3º Bimestre
 Esse repositório foi criado como uma atividade avaliativa em grupo para o 3º Bimestre da disciplina de Desenvolvolvimento de Aplicações Web, especificamente sobre o conteúdo
 de Django, ministrado em sala.
 
