@@ -1,0 +1,33 @@
+{% extends '../base.html'%}
+{% block content %}
+    {% if funcionario is not None %}
+        <h3>Atualizar Dados do <Fieldset:disabled></Fieldset:disabled>uncionario: {{funcionario.nome}}</h3>
+    {% else %}
+        <h3>Registrar Novo Funcionario</h3>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="nome">
+            Nome:
+            <input type="text" name="nome" value="{{funcionario.nome}}" required>
+        </label>
+        <label for="cargo">
+            Cargo:
+            <input type="text" name="cargo" value="{{funcionario.cargo}}" required>
+        </label>
+        <label for="email">
+            Email:
+            <input type="text" name="email" value="{{funcionario.email}}" required>
+        </label>
+        <label for="telefone">
+            Telefone:
+            <input type="text" name="telefone" value="{{funcionario.telefone}}" required>
+        </label>
+        <label for="endereco">
+            Endereço:
+            <input type="text" name="endereco" value="{{funcionario.endereco}}" required>
+        </label>
+        <button type="submit">Enviar</button>
+    </form>
+{% endblock %}
