@@ -1,0 +1,37 @@
+{% extends '../base.html'%}
+{% block content %}
+    {% if produtos|length != 0%}
+    <table>
+        <thead>
+            <th>Categoria</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Estoque</th>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{produto.categoria}}</td>
+                <td>{{produto.nome}}</td>
+                <td>{{produto.descricao}}</td>
+                <td>R${{produto.preco}}</td>
+                <td>{{produto.estoque}}</td>
+                {% if user.is_staff %}
+                <td><a href="{% url 'atualiza-produto' produto.id %}">Atualizar</a></td>
+                <td><a href="{% url 'remove-produto' produto.id %}">Remover</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+        <p>Não há nenhum produto registrado!</p>
+    {% endif %}
+
+    {% if user.is_staff%}
+        <a href="{% url 'cria-produto' %}">Registrar Novo Produto</a>
+    {% endif %}
+
+{% endblock %}

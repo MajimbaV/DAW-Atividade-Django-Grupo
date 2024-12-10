@@ -1,0 +1,54 @@
+{% extends '../base.html'%}
+{% block content %}
+    {% if produto is not None %}
+        <h3>Atualizar Dados do Produto: {{produto.nome}}</h3>
+    {% else %}
+        <h3>Registrar Novo Produto</h3>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+            <label for="categoria">
+                Categoria:
+                {% if categorias|length != 0 %}
+                    <select name="categoria" required>
+                        {% for categoria in categorias%}
+                            {% if categoria.id == produto.categoria.id %}
+                                <option value="{{categoria.id}}" selected>{{categoria.nome}}</option>
+                            {% else %}
+                                <option value="{{categoria.id}}">{{categoria.nome}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    Não há categorias registradas!
+                {% endif %}
+            </label>
+            
+            <label for="nome">
+                Nome:
+                <input type="text" name="nome" value="{{produto.nome}}" required>
+            </label>
+
+            <label for="descricao">
+                Descrição:
+                <input type="text" name="descricao" value="{{produto.descricao}}" required>
+            </label>
+
+            <label for="preco">
+                Preço:
+                <input type="number" name="preco" value="{{produto.preco}}" min="0" required>
+            </label>
+
+            <label for="estoque">
+                Estoque:
+                <input type="number" name="estoque" value="{{produto.estoque}}" min="0" required>
+            </label>
+
+
+        {% if categorias|length != 0 %}
+            <button type="submit">Enviar</button>
+        {% endif %}
+        
+    </form>
+{% endblock %}
